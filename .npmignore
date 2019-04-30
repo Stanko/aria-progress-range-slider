@@ -1,0 +1,11 @@
+.rts2_cache_cjs
+.rts2_cache_es
+.rts2_cache_umd
+.cache
+node_modules
+.DS_Store
+src
+.editorconfig
+*.log*
+_nogit
+docs

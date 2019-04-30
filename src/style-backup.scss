@@ -1,0 +1,155 @@
+$track-height: 5px;
+$vertical-padding: 10px;
+$total-height: 2 * $vertical-padding + $track-height;
+$handle-size: 13px;
+$handle-top: ($total-height - $handle-size) / 2;
+
+body {
+  margin: 50px 20px;
+  font-family: Helvetica, Arial, sans-serif;
+  max-width: 800px;
+  font-size: 16px;
+}
+
+h1, h2 {
+  font-size: 20px;
+  font-weight: normal;
+}
+
+
+.AriaProgressBar {
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+  padding: $vertical-padding 0;
+  z-index: 0;
+  position: relative;
+  user-select:none;
+  touch-action: none;
+}
+
+.AriaProgressBar:hover {
+  cursor: pointer;
+}
+
+.AriaProgressBar-track  {
+  height: $track-height;
+  position: relative;
+  width: 100%;
+  z-index: 0;
+  transform: scaleY(0.6);
+  transition: transform 250ms;
+
+  .AriaProgressBar--dragging & {
+    transform: scaleY(1);
+  }
+
+  @media (hover: hover) {
+    .AriaProgressBar:hover & {
+      transform: scaleY(1);
+    }
+  }
+}
+
+.AriaProgressBar-progress,
+.AriaProgressBar-buffer,
+.AriaProgressBar-hover {
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.AriaProgressBar-progress {
+  z-index: 1;
+}
+
+.AriaProgressBar-handle {
+  z-index: 1;
+  position: absolute;
+  display: block;
+  height: $handle-size;
+  width: $handle-size;
+  left: 0;
+  margin-left: $handle-size / -2;
+  background: #ff0000;
+  border-radius: 50%;
+  top: $handle-top;
+  transition: transform 250ms;
+  transform: scale(0);
+
+  .AriaProgressBar--dragging & {
+    transform: scale(1);
+  }
+
+  @media (hover: hover) {
+    .AriaProgressBar:hover & {
+      transform: scaleY(1);
+    }
+  }
+}
+
+.AriaProgressBar-hoverTooltip,
+.AriaProgressBar-mainTooltip {
+  background: rgba(#000, 0.9);
+  border-radius: 4px;
+  color: #fff;
+  padding: 3px 6px;
+  position: absolute;
+  font-size: 12px;
+  bottom: 100%;
+  transform: translateX(-50%);
+  left: 50%;
+  display: none;
+
+  .AriaProgressBar--dragging & {
+    display: block;
+  }
+
+  @media (hover: hover) {
+    .AriaProgressBar:hover & {
+      display: block;
+    }
+  }
+}
+
+.AriaProgressBar-mainTooltip {
+  background: blue;
+  z-index: 1;
+}
+
+// THEME
+
+.AriaProgressBar-track {
+  background: rgba(#fff, 0.4);
+}
+
+.AriaProgressBar-progress {
+  background: #ff0000;
+}
+
+.AriaProgressBar-buffer {
+  background: rgba(#fff, 0.4);
+}
+
+.AriaProgressBar-hover {
+  background: rgba(#fff, 0.5);
+}
+
+.AriaProgressBar-handle {
+  background: #ff0000;
+  border-radius: 50%;
+  transition: transform 250ms;
+  transform: scale(0);
+
+  .AriaProgressBar--dragging & {
+    transform: scale(1);
+  }
+
+  @media (hover: hover) {
+    .AriaProgressBar:hover & {
+      transform: scaleY(1);
+    }
+  }
+}

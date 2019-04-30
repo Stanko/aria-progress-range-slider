@@ -1,0 +1,39 @@
+{
+  "name": "aria-progress-range-slider",
+  "version": "0.0.1",
+  "description": "Accessible progress bar / slider component",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html",
+    "build": "rm -rf ./dist && microbundle --entry ./src/index.ts --output ./dist",
+    "build-docs": "rm -rf ./docs && parcel build index.html --out-dir ./docs --public-url /aria-progress-range-slider"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.5.1",
+    "microbundle": "^0.11.0",
+    "node-sass": "^4.11.0",
+    "parcel-bundler": "^1.12.3",
+    "typescript": "^3.4.2"
+  },
+  "main": "dist/aria-progress-range-slider.js",
+  "umd:main": "dist/aria-progress-range-slider.umd.js",
+  "module": "dist/aria-progress-range-slider.mjs",
+  "source": "src/index.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Stanko/aria-progress-range-slider.git"
+  },
+  "keywords": [
+    "slider",
+    "aria",
+    "progress",
+    "progress bar"
+  ],
+  "author": "Stanko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Stanko/aria-progress-range-slider/issues"
+  },
+  "homepage": "https://github.com/Stanko/aria-progress-range-slider#readme",
+  "prepublish": "npm run build && npm run build-docs"
+}
