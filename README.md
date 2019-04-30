@@ -196,8 +196,8 @@ Check [https://github.com/Stanko/aria-progress-range-slider/blob/master/src/styl
 This is component's public API.
 
 ```js
-// Removes all of the HTML elements
-// and removes all listeners
+// Removes HTML element and listener as well as
+// aria attributes and CSS classes from the wrapper
 destroy(): void;
 
 // Gets slider's current value
@@ -214,9 +214,6 @@ disable(): void;
 
 // Enables the slider
 enable(): void;
-
-// Removes all listeners
-unbind(): void;
 ```
 
 

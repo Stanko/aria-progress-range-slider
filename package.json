@@ -1,6 +1,6 @@
 {
   "name": "aria-progress-range-slider",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Accessible progress bar / slider component",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -20,6 +20,7 @@
   "umd:main": "dist/aria-progress-range-slider.umd.js",
   "module": "dist/aria-progress-range-slider.mjs",
   "source": "src/index.ts",
+  "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/Stanko/aria-progress-range-slider.git"

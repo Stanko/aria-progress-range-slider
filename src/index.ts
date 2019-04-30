@@ -115,6 +115,7 @@ class ProgressBar {
   private range:number;
   private isDragging:boolean = false;
   private isMouseOver:boolean = false;
+  private isDestroyed:boolean = false;
 
   private elementLeft:number;
 
@@ -181,9 +182,9 @@ class ProgressBar {
 
     this.element.classList.add(this.options.className);
 
-    this.trackElement.setAttribute('tabindex', '0');
-    this.trackElement.setAttribute('role', 'slider');
-    this.trackElement.setAttribute('aria-valuemin', '0');
+    this.element.setAttribute('tabindex', '0');
+    this.element.setAttribute('role', 'slider');
+    this.element.setAttribute('aria-valuemin', '0');
 
     this.setOptions();
 
@@ -372,17 +373,17 @@ class ProgressBar {
   }
 
   private setOptions() {
-    this.trackElement.setAttribute('aria-valuemax', this.options.max.toString());
-    this.trackElement.setAttribute('aria-label', this.options.ariaLabel);
+    this.element.setAttribute('aria-valuemax', this.options.max.toString());
+    this.element.setAttribute('aria-label', this.options.ariaLabel);
 
     if (this.options.ariaLabeledBy) {
-      this.trackElement.setAttribute('aria-labeledby', this.options.ariaLabeledBy);
+      this.element.setAttribute('aria-labeledby', this.options.ariaLabeledBy);
     }
   }
 
   private setAriaProps() {
-    this.trackElement.setAttribute('aria-valuenow', this.realValue.toString());
-    this.trackElement.setAttribute('aria-valuetext', this.options.getValueText(this.realValue, this.options))
+    this.element.setAttribute('aria-valuenow', this.realValue.toString());
+    this.element.setAttribute('aria-valuetext', this.options.getValueText(this.realValue, this.options))
   }
 
   private limitValue(value:number) {
@@ -456,38 +457,7 @@ class ProgressBar {
     return parseFloat(value.toFixed(4));
   }
 
-  // Public
-  public getValue() {
-    return this.realValue;
-  }
-
-  public setValue(value:number) {
-    if (this.isDragging) {
-      return;
-    }
-
-    this.updateValue(this.includeStep(value / this.range));
-  }
-
-  public setBufferValue(value:number) {
-    this.bufferElement.style.transform = `scaleX(${ value / this.range })`;
-  }
-
-  public disable() {
-    this.options.disabled = true;
-    this.element.classList.add(`${ this.options.className }--disabled`);
-    this.trackElement.setAttribute('aria-disabled', 'true');
-    this.trackElement.setAttribute('disabled', 'true');
-    this.trackElement.setAttribute('tabindex', '-1');
-  }
-
-  public enable() {
-    this.options.disabled = false;
-    this.element.classList.remove(`${ this.options.className }--disabled`);
-    this.trackElement.setAttribute('tabindex', '0');
-  }
-
-  public unbind() {
+  private unbind() {
     // Touch events
     this.element.removeEventListener('touchstart', this.handleDragStart);
 
@@ -507,29 +477,90 @@ class ProgressBar {
     this.element.removeEventListener('keydown', this.handleKeyDown);
   }
 
+  // Public
+  public getValue() {
+    if (this.isDestroyed) {
+      console.warn('ProgressBar instance is destroyed, options: ', this.options);
+      return;
+    }
+
+    return this.realValue;
+  }
+
+  public setValue(value:number) {
+    if (this.isDestroyed) {
+      console.warn('ProgressBar instance is destroyed, options: ', this.options);
+      return;
+    }
+
+    if (this.isDragging) {
+      return;
+    }
+
+    this.updateValue(this.includeStep(value / this.range));
+  }
+
+  public setBufferValue(value:number) {
+    if (this.isDestroyed) {
+      console.warn('ProgressBar instance is destroyed, options: ', this.options);
+      return;
+    }
+
+    this.bufferElement.style.transform = `scaleX(${ value / this.range })`;
+  }
+
+  public disable() {
+    if (this.isDestroyed) {
+      console.warn('ProgressBar instance is destroyed, options: ', this.options);
+      return;
+    }
+
+    this.options.disabled = true;
+    this.element.classList.add(`${ this.options.className }--disabled`);
+    this.element.setAttribute('aria-disabled', 'true');
+    this.element.setAttribute('disabled', 'true');
+    this.element.setAttribute('tabindex', '-1');
+  }
+
+  public enable() {
+    if (this.isDestroyed) {
+      console.warn('ProgressBar instance is destroyed, options: ', this.options);
+      return;
+    }
+
+    this.options.disabled = false;
+    this.element.classList.remove(`${ this.options.className }--disabled`);
+    this.element.setAttribute('tabindex', '0');
+  }
+
   public destroy() {
+    if (this.isDestroyed) {
+      console.warn('ProgressBar instance is already destroyed');
+      return;
+    }
+
     // Unbind everything
     this.unbind();
 
     // Empty element
     this.element.innerHTML = '';
 
-    // Reset elements
-    this.element = null;
-    this.handleElement = null;
-    this.trackElement = null;
-    this.progressElement = null;
-    this.bufferElement = null;
-    this.hoverElement = null;
-    this.valueTooltipElement = null;
-    this.hoverTooltipElement = null;
 
-    this.options = { ...DEFAULT_OPTIONS };
-    this.value = 0;
-    this.realValue = 0;
-    this.range = 0;
-    this.isDragging = false;
-    this.isMouseOver = false;
+    this.isDestroyed = true;
+
+    this.element.classList.remove(this.options.className);
+
+    this.element.removeAttribute('tabindex');
+    this.element.removeAttribute('role');
+    this.element.removeAttribute('aria-valuemin');
+    this.element.removeAttribute('aria-valuemax');
+    this.element.removeAttribute('aria-label');
+    this.element.removeAttribute('aria-valuenow');
+    this.element.removeAttribute('aria-valuetext');
+
+    if (this.options.ariaLabeledBy) {
+      this.element.removeAttribute('aria-labeledby');
+    }
   }
 }
 

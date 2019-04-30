@@ -46,6 +46,12 @@ $handle-top: ($total-height - $handle-height) / 2;
   z-index: 1;
 }
 
+.AriaProgressBar-buffer,
+.AriaProgressBar-hover,
+.AriaProgressBar-handle {
+  pointer-events: none;
+}
+
 .AriaProgressBar-handle {
   z-index: 1;
   position: absolute;
@@ -79,13 +85,12 @@ $handle-top: ($total-height - $handle-height) / 2;
 
 // Default theme
 
+.AriaProgressBar:focus {
+  outline: 2px solid blue;
+}
+
 .AriaProgressBar-track {
   background: #bbc;
-
-  &:focus {
-    outline: 2px solid blue;
-    outline-offset: 5px;
-  }
 }
 
 .AriaProgressBar-progress {
