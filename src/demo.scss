@@ -5,21 +5,49 @@
 }
 
 body {
-  margin: 50px 30px;
   font-family: Helvetica, Arial, sans-serif;
-  max-width: 800px;
   font-size: 16px;
   background: #789;
 }
 
+.Content {
+  padding: 50px 30px;
+  max-width: 800px;
+  position: relative;
+  text-align: center;
+  margin: 0 auto;
+}
+
 h1 {
-  font-size: 30px;
+  font-size: 22px;
   font-weight: normal;
-  margin: 1em 0 2em;
+  margin: 0 0 10px 0;
 }
 
 h2 {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: normal;
-  margin: 1em 0 0.5em;
+  margin: 20px 0 10px;
+}
+
+.Links {
+  margin-bottom: 80px;
+}
+
+.Links a {
+  color: #d7d9d6;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(#d7d9d6, 0.3);
+  transition: border 250ms, color 250ms;
+}
+
+.Links a:hover {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+.Links a:focus {
+  outline: none;
+  outline-offset: 5px;
+  outline: 1px solid blue;
 }

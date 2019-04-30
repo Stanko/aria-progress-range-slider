@@ -43,7 +43,7 @@ const trackTwo = new ProgressBar(document.querySelector('#track-two'), {
 
 const trackThree = new ProgressBar('#track-three', {
   min: 5,
-  initialValue: 7.5,
+  initialValue: 5.5,
   max: 10,
   step: 0.1,
   arrowMoveStep: 0.1,
