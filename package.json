@@ -1,11 +1,11 @@
 {
   "name": "aria-progress-range-slider",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Accessible progress bar / slider component",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel index.html",
-    "build": "rm -rf ./dist && microbundle --entry ./src/index.ts --output ./dist",
+    "build": "rm -rf ./dist && microbundle --entry ./src/index.ts --output ./dist && parcel build src/style.scss --out-dir ./dist",
     "build-docs": "rm -rf ./docs && parcel build index.html --out-dir ./docs --public-url /aria-progress-range-slider"
   },
   "devDependencies": {
