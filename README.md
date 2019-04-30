@@ -15,6 +15,21 @@ It is written in TypeScript and I will be releasing React component soon.
 But the library itself is fully functional.
 
 
+## Usage
+
+```js
+// Import the class
+import ProgressBar from 'aria-progress-range-slider';
+// and the CSS
+import 'aria-progress-range-slider/dist/style.css';
+
+const selector = '.progress-bar';
+const options = {};
+
+new ProgressBar(selector, options);
+```
+
+
 ## Options
 
 ```js
