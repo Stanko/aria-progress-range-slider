@@ -217,7 +217,7 @@ unbind(): void;
 
 ## Development
 
-I'm using [https://parceljs.org/](Parcel) for development and docs, while [microbundle](https://github.com/developit/microbundle) is used for npm builds.
+I'm using [Parcel](https://parceljs.org) for development and docs, while [microbundle](https://github.com/developit/microbundle) is used for npm builds.
 
 For local development use:
 
