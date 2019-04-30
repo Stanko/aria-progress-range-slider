@@ -12,8 +12,6 @@ import { getElementLeft } from './helpers';
 
 // https://www.w3.org/TR/wai-aria-practices/examples/slider/slider-1.html
 
-// TODO disable and destroy
-
 type TSelectorOrElement = HTMLElement | Element | string;
 
 interface UIEvent {
@@ -487,6 +485,51 @@ class ProgressBar {
     this.options.disabled = false;
     this.element.classList.remove(`${ this.options.className }--disabled`);
     this.trackElement.setAttribute('tabindex', '0');
+  }
+
+  public unbind() {
+    // Touch events
+    this.element.removeEventListener('touchstart', this.handleDragStart);
+
+    window.removeEventListener('touchmove', this.handleTouchMove);
+    window.removeEventListener('touchend', this.handleDragEnd);
+
+    // Dragging and hover
+    // Mouse events
+    this.element.removeEventListener('mouseenter', this.handleMouseEnter);
+    this.element.removeEventListener('mouseleave', this.handleMouseLeave);
+    this.element.removeEventListener('mousedown', this.handleDragStart);
+
+    window.removeEventListener('mouseup', this.handleDragEnd);
+    window.removeEventListener('mousemove', this.handleMouseMove);
+
+    // Keyboard events
+    this.element.removeEventListener('keydown', this.handleKeyDown);
+  }
+
+  public destroy() {
+    // Unbind everything
+    this.unbind();
+
+    // Empty element
+    this.element.innerHTML = '';
+
+    // Reset elements
+    this.element = null;
+    this.handleElement = null;
+    this.trackElement = null;
+    this.progressElement = null;
+    this.bufferElement = null;
+    this.hoverElement = null;
+    this.valueTooltipElement = null;
+    this.hoverTooltipElement = null;
+
+    this.options = { ...DEFAULT_OPTIONS };
+    this.value = 0;
+    this.realValue = 0;
+    this.range = 0;
+    this.isDragging = false;
+    this.isMouseOver = false;
   }
 }
 
