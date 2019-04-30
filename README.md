@@ -5,7 +5,7 @@
 
 ## What is this
 
-As I haven't one, I've tried to create simple to use, fully accessible slider component.
+As I haven't found one, I've tried to create simple to use, fully accessible slider component.
 
 It is written in TypeScript and I will be releasing React component soon.
 
