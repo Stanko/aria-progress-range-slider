@@ -11,7 +11,7 @@ It is written in TypeScript and I will be releasing React component soon.
 
 I will appreciate any feedback and pull requests.
 
-[DEMO](http://muffinman.io/aria-progress-range-slider/)
+[Demo](http://muffinman.io/aria-progress-range-slider/) | [Blog post](https://muffinman.io/accessible-range-slider)
 
 ### Features
 
@@ -98,6 +98,7 @@ float?: boolean;
 
 // Function that will be used to populate both tooltips (hover and main one)
 // Params are current value and options
+// If set to null, no tooltips will be used
 // Default: (value) => value.toString()
 getTooltipText?(value: number, options?: IProgressBarOptions): string;
 
